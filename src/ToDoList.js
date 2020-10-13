@@ -7,17 +7,15 @@ function ToDoList() {
   const [todos, changeTodos] = useState([]);
 
   const handleClick = (id, completed) => {
-    console.log(id);
     let newToDos = todos.map((todo) => {
       //go through each object in the todos array
       if (todo.id === id) {
         //for each object, if the id matches the id that was clicked, return:
-        return { ...todo, completed: !completed }; //the object thats a copy of the todo item, but completed property is flipped
+        return { ...todo, completed: !completed }; //the object thats a copy of the todos todo item, but completed property is flipped
       }
       return todo; //otherwise, return that object as is to the new array
     });
     changeTodos(newToDos); //set the state to the updated copy
-    console.log(newToDos);
   };
 
   const addToList = (e) => {
@@ -33,10 +31,9 @@ function ToDoList() {
   };
 
   const removeFromList = (id) => {
-    // given the id, splice the array by removing the object that was selected, return a new array without the object with the id numbers updated. \
+    // given the id, splice the array by removing the object that was selected, return a modified array with the id numbers updated. \
     let newToDos = [...todos];
     newToDos.splice(id, 1);
-    console.log(newToDos);
 
     const todosUpdatedIds = newToDos.map((item) => {
       if (item.id > id) {
@@ -44,9 +41,6 @@ function ToDoList() {
       }
       return item;
     });
-
-    console.log(todosUpdatedIds);
-
     changeTodos(todosUpdatedIds);
   };
 
