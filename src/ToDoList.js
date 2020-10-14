@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ToDoItem from "./ToDoItem";
 
-let i = 0; //need to store this outside of the component function to iterate.
+let i = 0; //need to store this outside of the component function to iterate. in general you don't want to update the id of a component after it is given.
 
 function ToDoList() {
   const [todos, changeTodos] = useState([]);
@@ -31,17 +31,13 @@ function ToDoList() {
   };
 
   const removeFromList = (id) => {
-    // given the id, splice the array by removing the object that was selected, return a modified array with the id numbers updated. \
-    let newToDos = [...todos];
-    newToDos.splice(id, 1);
+    // given the id, filter through copy of old state, and return all the elements that do NOT have the matching id and return that new array. This effectively deletes the element with the id that is passed into this function. Want to keep every object's id immutable once assigned, also doing it this way is preferred over using the array index to map to the id since the array is growing and shrinking dynamically at different places!
 
-    const todosUpdatedIds = newToDos.map((item) => {
-      if (item.id > id) {
-        return { ...item, id: item.id - 1 };
-      }
-      return item;
-    });
+    let newToDos = [...todos];
+
+    const todosUpdatedIds = newToDos.filter((item) => item.id !== id); //similar to .map, but returns values to a new array where the callback function returns true.
     changeTodos(todosUpdatedIds);
+    console.log(todosUpdatedIds);
   };
 
   return (
