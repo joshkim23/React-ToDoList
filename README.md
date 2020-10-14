@@ -11,6 +11,7 @@ Features include:
 Features to be added: 
 1. ability to edit todo items 
 2. ability to re order todo items using drag feature 
+3. add the todo list in local storage using useEffect hook so that refreshing the page won't delete all the data.
 
 
 ![toDo List in action](toDoListHooks.png?raw=true "toDoListHooks")
