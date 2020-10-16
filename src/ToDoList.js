@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ToDoItem from "./ToDoItem";
 
 let i = 0; //need to store this outside of the component function to iterate. in general you don't want to update the id of a component after it is given.
 
 function ToDoList() {
-  const [todos, changeTodos] = useState([]);
+  const [todos, changeTodos] = useState([] || initialTodos);
+
+  useEffect(() => {
+    window.localStorage.setItem(todos, JSON.stringify(todos)); //sets
+    const initialTodos = JSON.parse(window.localStorage.getItem(todos));
+  }, [todos]); //only rerenders if [todos] changes!
 
   const handleClick = (id, completed) => {
     let newToDos = todos.map((todo) => {

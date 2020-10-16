@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function ({ id, text, handleClick, completed, remove }) {
+  console.log("hi");
   const toggleCompleted = () => handleClick(id, completed);
   const deleteItem = () => remove(id);
 
